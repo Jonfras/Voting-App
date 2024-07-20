@@ -1,14 +1,24 @@
 <script>
-  import TestComponent from '$lib/components/TestComponent.svelte';
+    import Button from 'bootstrap/js/src/button.js';
+    import {goto} from '$app/navigation';
+
+    let code = '';
+
+    function navigateTo(uri) {
+        return () => {
+            goto(uri);
+        };
+    }
 </script>
 
 <div class="container-fluid">
-  <h1>Svelte 4</h1>
-  <TestComponent />
+    <h1>Voting-App</h1>
+    <button on:click={navigateTo('admin')}>Admin</button>
+
+    <input bind:value={code} type="text" placeholder="Code">
+    <button on:click={navigateTo(`vote/${code}`)}>Vote</button>
 </div>
 
-<style lang="scss">
-  // next line to make bootstrap incl. icons available in the whole project
-  @import 'bootstrap/dist/css/bootstrap.min.css';
-  @import 'bootstrap-icons/font/bootstrap-icons.min.css';
+<style>
+
 </style>
